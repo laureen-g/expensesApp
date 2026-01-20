@@ -1,16 +1,24 @@
-# expenses
+💰 Expenses App – Controle de Despesas Pessoais
 
-A new Flutter project.
+Este aplicativo foi desenvolvido com o objetivo de facilitar o controle de despesas pessoais, permitindo ao usuário registrar, visualizar e acompanhar seus gastos de forma prática e intuitiva.
 
-## Getting Started
+Com ele, é possível:
 
-This project is a starting point for a Flutter application.
+Adicionar despesas com título, valor e data
 
-A few resources to get you started if this is your first Flutter project:
+Visualizar a lista de gastos cadastrados
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Acompanhar o resumo das despesas
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Ter uma visão mais clara de onde o dinheiro está sendo gasto
+
+O projeto foi criado como parte do aprendizado em Flutter, com foco em boas práticas de desenvolvimento, organização de código e construção de interfaces modernas e responsivas.
+
+🚀 Tecnologias utilizadas:
+
+Flutter
+
+Dart
+
+📌 Objetivo do projeto:
+Aprimorar conhecimentos em desenvolvimento mobile e criar uma solução simples e funcional para o controle financeiro pessoal.
