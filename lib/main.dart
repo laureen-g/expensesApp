@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:expenses/models/transaction.dart';
-import 'package:intl/intl.dart';
+import 'package:expenses/components/transaction_user.dart';
 
 
 void main() {
@@ -17,15 +16,6 @@ class ExpensesApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-
-  final _transactions = [
-    Transaction(id: 't1', title: 'Novo tênis de corrida', value: 310.56, date: DateTime.now()),
-    Transaction(id: 't2', title: 'Conta de luz', value: 211.30, date: DateTime.now()),
-    Transaction(id: 't3', title: 'Mercado', value: 107.03, date: DateTime.now()),
-    Transaction(id: 't4', title: 'Cinema', value: 30, date: DateTime.now()),
-
-  ];
-
 
   @override
   Widget build(BuildContext context) {
@@ -46,90 +36,7 @@ class MyHomePage extends StatelessWidget {
               elevation: 5,
             ),
           ),
-          Container(
-            // width: double.infinity,
-            child: Column(
-              children: _transactions.map((tr) {
-                return Card(
-                  child: Row(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.symmetric(
-                          horizontal: 15,
-                          vertical: 10
-                        ),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.purple,
-                            width: 2
-                          )
-                        ),
-                        padding: EdgeInsets.all(10),
-                        child: Text("R\$ ${tr.value.toStringAsFixed(2)}",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Colors.purple
-                            ),
-                          ),
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(tr.title,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16
-                            ),
-                            textAlign: TextAlign.end
-                          ),
-                          Text(DateFormat('dd MMM y').format(tr.date),
-                            style: TextStyle(
-                              fontSize: 13,
-                              color: Colors.grey
-                            ),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                );
-              }).toList(),
-            ),
-          ),
-          Card(
-            elevation: 5,
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Column(
-                children: [
-                  TextField(
-                    decoration: InputDecoration(
-                      labelText: 'Título'
-                    ),
-                  ),
-                  TextField(
-                    decoration: InputDecoration(
-                      labelText: 'Valor (R\$)'
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      TextButton(
-                        child: Text('Nova Transação'),
-                        style: TextButton.styleFrom(
-                          foregroundColor: Colors.purple
-                        ),
-                        onPressed: () => {},
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            )
-          )
+          TransactionUser()
         ],
       )
     );
