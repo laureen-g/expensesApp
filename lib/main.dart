@@ -11,7 +11,33 @@ void main() {
 class ExpensesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: MyHomePage());
+    return MaterialApp(
+      home: MyHomePage(),
+      theme: ThemeData(
+        primarySwatch: Colors.purple,
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: Colors.purple[800],
+          foregroundColor: Colors.white,
+        ),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.purple[800],
+          foregroundColor: Colors.white,
+        ),
+        textTheme: TextTheme(
+          titleLarge: TextStyle(
+            fontFamily: 'Quicksand',
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+          titleMedium: TextStyle(
+            fontFamily: 'Quicksand',
+            fontSize: 16,
+            fontWeight: FontWeight.bold
+          )
+        ),
+        fontFamily: 'OpenSans',
+      ),
+    );
   }
 }
 
