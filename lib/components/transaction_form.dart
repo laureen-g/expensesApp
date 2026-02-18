@@ -44,58 +44,70 @@ class _TransactionFormState extends State<TransactionForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            TextField(
-              controller: _titleController,
-              onSubmitted: (_) => _submitForm(),
-              decoration: InputDecoration(labelText: 'Título'),
-            ),
-            TextField(
-              controller: _valueController,
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
-              onSubmitted: (_) => _submitForm(),
-              decoration: InputDecoration(labelText: 'Valor (R\$)'),
-            ),
-            Container(
-              height: 70,
-              child: Row(
-                children: [
-                  Expanded(child: Text(
-                    _selectedDate == null
-                        ? 'Nenhuma data selecionada!'
+    return SingleChildScrollView(
+      child: Card(
+        elevation: 5,
+        child: Padding(
+          padding: EdgeInsets.only(top: 10,
+              left: 10,
+              right: 10,
+              bottom: 20 + MediaQuery.of(context).viewInsets.bottom
+          ),
+          child: Column(
+            children: [
+              TextField(
+                controller: _titleController,
+                onSubmitted: (_) => _submitForm(),
+                decoration: InputDecoration(labelText: 'Título'),
+              ),
+              TextField(
+                controller: _valueController,
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                onSubmitted: (_) => _submitForm(),
+                decoration: InputDecoration(labelText: 'Valor (R\$)'),
+              ),
+              Container(
+                height: 70,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        _selectedDate == null
+                            ? 'Nenhuma data selecionada!'
                         // : 'Data selecionada: ${DateFormat('dd/MM/y').format(_selectedDate!)}',
-                        : DateFormat('dd/MM/y').format(_selectedDate!),
-                  )),
-                  TextButton(
-                    child: Text(
-                      'Selecionar data',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                            : DateFormat('dd/MM/y').format(_selectedDate!),
+                      ),
                     ),
-                    onPressed: _showDatePicker,
-                    style: TextButton.styleFrom(foregroundColor: Colors.purple),
+                    TextButton(
+                      child: Text(
+                        'Selecionar data',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      onPressed: _showDatePicker,
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors.purple,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ElevatedButton(
+                    child: Text('Nova Transação'),
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: Theme
+                          .of(context)
+                          .primaryColor,
+                    ),
+                    onPressed: _submitForm,
                   ),
                 ],
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                ElevatedButton(
-                  child: Text('Nova Transação'),
-                  style: TextButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: Theme.of(context).primaryColor,
-                  ),
-                  onPressed: _submitForm,
-                ),
-              ],
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
