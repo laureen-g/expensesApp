@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:expenses/components/adaptative_button.dart';
+import 'package:expenses/components/adaptative_texField.dart';
+import 'package:expenses/components/adaptative_datePicker.dart';
 
 class TransactionForm extends StatefulWidget {
   final void Function(String, double, DateTime) onSubmit;
@@ -26,21 +28,7 @@ class _TransactionFormState extends State<TransactionForm> {
     widget.onSubmit(title, value, _selectedDate!);
   }
 
-  _showDatePicker() {
-    showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2020),
-      lastDate: DateTime.now(),
-    ).then((pickedDate) {
-      if (pickedDate == null) {
-        return;
-      }
-      setState(() {
-        _selectedDate = pickedDate;
-      });
-    });
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -48,61 +36,36 @@ class _TransactionFormState extends State<TransactionForm> {
       child: Card(
         elevation: 5,
         child: Padding(
-          padding: EdgeInsets.only(top: 10,
-              left: 10,
-              right: 10,
-              bottom: 20 + MediaQuery.of(context).viewInsets.bottom
+          padding: EdgeInsets.only(
+            top: 10,
+            left: 10,
+            right: 10,
+            bottom: 20 + MediaQuery.of(context).viewInsets.bottom,
           ),
           child: Column(
             children: [
-              TextField(
+              AdaptativeTexfield(
                 controller: _titleController,
-                onSubmitted: (_) => _submitForm(),
-                decoration: InputDecoration(labelText: 'Título'),
+                submitForm: (_) => _submitForm(),
+                label: 'Título'
               ),
-              TextField(
-                controller: _valueController,
+              AdaptativeTexfield(
+                controller: _titleController,
+                submitForm: (_) => _submitForm(),
+                label: 'Valor (R\$)',
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
-                onSubmitted: (_) => _submitForm(),
-                decoration: InputDecoration(labelText: 'Valor (R\$)'),
               ),
-              Container(
-                height: 70,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        _selectedDate == null
-                            ? 'Nenhuma data selecionada!'
-                        // : 'Data selecionada: ${DateFormat('dd/MM/y').format(_selectedDate!)}',
-                            : DateFormat('dd/MM/y').format(_selectedDate!),
-                      ),
-                    ),
-                    TextButton(
-                      child: Text(
-                        'Selecionar data',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      onPressed: _showDatePicker,
-                      style: TextButton.styleFrom(
-                        foregroundColor: Colors.purple,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+                AdaptativeDatePicker(selectedDate: _selectedDate, onDateChange: (newDate) {
+                setState(() {
+                  _selectedDate = newDate;
+                });
+              }),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  ElevatedButton(
-                    child: Text('Nova Transação'),
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Theme
-                          .of(context)
-                          .primaryColor,
-                    ),
-                    onPressed: _submitForm,
+                  AdaptativeButton(
+                    label: 'Nova Transação',
+                    onPressedFn: _submitForm,
                   ),
                 ],
               ),
